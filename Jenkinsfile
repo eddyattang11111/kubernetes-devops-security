@@ -39,12 +39,13 @@ pipeline {
       }
       stage('Kubernetes Deployment - DEV')
       {
-        withKubeConfig([credentialsId: 'kubeconfig']){
-          steps {
-            sh "kubectl run pod --image nginx"
+        steps {
+          withKubeConfig([credentialsId: 'kubeconfig']){
+            sh 'echo giga'
           }
-          
+
         }
+
       }
     }
 }
