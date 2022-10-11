@@ -42,6 +42,8 @@ pipeline {
         steps {
           withKubeConfig([credentialsId: 'kubeconfig']){
             sh 'echo giga'
+            sh "sed -i 's#replace#eattang/numeric-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
+            sh "kubectl apply -f k8s_deployment_service.yaml"
           }
 
         }
