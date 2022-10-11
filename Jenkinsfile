@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-      DOCKERHUB_CREDENTIALS=credentials('eddy-dockerhub-credentials')
+      DOCKERHUB_CREDENTIALS=credentials('eddy-dockerhub-cred')
   }
   stages {
       stage('Build Artifact') {
