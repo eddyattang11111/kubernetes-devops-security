@@ -39,7 +39,9 @@ pipeline {
       }
       stage('Kubernetes Deployment - DEV')
       {
-        withKubeConfig([credentialsId: 'kubeconfig'])
+        withKubeConfig([credentialsId: 'kubeconfig']){
+          sh "kubectl run pod --image nginx"
+        }
       }
     }
 }
