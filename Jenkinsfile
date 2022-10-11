@@ -32,6 +32,7 @@ pipeline {
       stage('Docker Build and Push')  {
         steps {
           sh 'printenv'
+          sh 'echo Not pushing nada'
 
         }
       }
