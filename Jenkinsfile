@@ -1,6 +1,8 @@
 pipeline {
   agent any
-
+  environment {
+      DOCKERHUB_CREDENTIALS=credentials('eddy-dockerhub-credentials')
+  }
   stages {
       stage('Build Artifact') {
             steps {
@@ -20,6 +22,18 @@ pipeline {
                 jacoco execPattern: 'target/jacoco.exec'
               }
             }
-        }  
+        }
+      
+      stage('Dockerhub login') {
+        steps {
+          sh 'echo $DOCKERHUB_CREDENTIALS_PSW |  docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        }
+      }
+      stage('Docker Build and Push')  {
+        steps {
+          sh 'printenv'
+
+        }
+      }
     }
 }
