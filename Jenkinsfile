@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
       DOCKERHUB_CREDENTIALS=credentials('eddy-dockerhub-cred')
+      SONARQUBE_CREDENTIALS=credentials('eddy-sonarqube-key')
   }
   stages {
       stage('Build Artifact') {
@@ -23,13 +24,21 @@ pipeline {
               }
             }
         }
+
+      stage('Sonarqube- SAST') {
+        steps {
+        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://eddyattang.westus3.cloudapp.azure.com:9000 -Dsonar.login=$SONARQUBE_CREDENTIALS_PSW"
+        }
+      }
       
+
       stage('Dockerhub login') {
         steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW |  docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
         }
       }
-      stage('Docker Build and Push')  {
+
+      stage('Docker push')  {
         steps {
           sh 'printenv'
           sh 'echo Not pushing nada'
@@ -37,6 +46,7 @@ pipeline {
           sh 'docker push eattang/numeric-app:""$GIT_COMMIT""'
         }
       }
+
       stage('Kubernetes Deployment - DEV')
       {
         steps {
