@@ -24,29 +24,11 @@ pipeline {
               }
             }
         }
-
-      stage('Sonarqube- SAST') {
-        steps {
-          withSonarQubeEnv('sonarqube'){
-            sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://eddyattang.westus3.cloudapp.azure.com:9000 -Dsonar.login=sqp_197c589c2f7398b944978be23d472d6a2880c899"
-          }
-          timeout(time:2, unit: 'MINUTES') {
-            script {
-              waitForQualityGate abortPipeline:true
-            }
-
-          }
-
-        }
-      }
-      
-
       stage('Dockerhub login') {
         steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW |  docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
         }
       }
-
       stage('Docker push')  {
         steps {
           sh 'printenv'
@@ -55,7 +37,6 @@ pipeline {
           sh 'docker push eattang/numeric-app:""$GIT_COMMIT""'
         }
       }
-
       stage('Kubernetes Deployment - DEV')
       {
         steps {
