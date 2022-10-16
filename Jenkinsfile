@@ -24,6 +24,17 @@ pipeline {
               }
             }
         }
+      stage('Vulnerability scan - Docker') {
+        steps {
+          sh "mvn dependency-check:check"
+        }
+        post {
+          always {
+            dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+          }
+        }
+
+      }
       stage('Dockerhub login') {
         steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW |  docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
