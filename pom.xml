@@ -71,7 +71,7 @@
 				<version>7.2.1</version>
 				<configuration>
 					<format>ALL</format>
-					<FailBuildOnCVSS>9</FailBuildOnCVSS>
+					<FailBuildOnCVSS>2</FailBuildOnCVSS>
 				</configuration>
 				<executions>
 					<execution>
