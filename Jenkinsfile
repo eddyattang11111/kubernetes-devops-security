@@ -53,7 +53,7 @@ pipeline {
           // sh 'mkdir -p $WORKSPACE/trivy'
           
           sh 'sudo docker build -t eattang/numeric-app:""$GIT_COMMIT"" .'
-          // sh 'docker push eattang/numeric-app:""$GIT_COMMIT""'
+          sh 'docker push eattang/numeric-app:""$GIT_COMMIT""'
         }
       }
       stage('Kubernetes Deployment - DEV')
@@ -74,12 +74,5 @@ pipeline {
             jacoco execPattern: 'target/jacoco.exec'
             dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
       }
-      // success {
-
-      // }
-
-      // failure {
-
-      // }
     }
 }
