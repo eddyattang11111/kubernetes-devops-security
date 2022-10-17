@@ -34,23 +34,10 @@ pipeline {
             },
             "Trivy scan": {
                 echo  "Trivy scan"
-              //  sh "bash trivy-docker-image-scan.sh"
+                sh "bash trivy-docker-image-scan.sh"
             }
           )
           
-        }
-      }
-
-      stage('run-parallel-branches') {
-        steps {
-          parallel(
-            "A": {
-              echo "This is branch a"
-            },
-            "B": {
-              echo "This is branch b"
-            }
-          )
         }
       }
 
