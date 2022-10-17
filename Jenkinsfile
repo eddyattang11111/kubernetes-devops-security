@@ -18,12 +18,26 @@ pipeline {
               sh "mvn test"
             }
         }
+      // stage('Vulnerability scan - Docker') {
+      //   steps {
+      //     sh "mvn dependency-check:check"
+      //   }
+      // }
+
       stage('Vulnerability scan - Docker') {
         steps {
-          sh "mvn dependency-check:check"
+          parallel {
+            "Dependency Scan": {
+                sh "mvn dependency-check:check"
+            },
+            "Trivy scan": {
+               sh "bash trivy-docker-image-scan.sh"
+            }
+          }
+          
         }
-
       }
+
       stage('Dockerhub login') {
         steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW |  docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
