@@ -50,9 +50,9 @@ pipeline {
         steps {
           sh 'printenv'
           sh 'echo Not pushing nada'
-          sh 'mkdir -p $WORKSPACE/trivy'
-          sh 'docker build -t eattang/numeric-app:""$GIT_COMMIT"" .'
-          sh 'docker push eattang/numeric-app:""$GIT_COMMIT""'
+          // sh 'mkdir -p $WORKSPACE/trivy'
+          // sh 'docker build -t eattang/numeric-app:""$GIT_COMMIT"" .'
+          // sh 'docker push eattang/numeric-app:""$GIT_COMMIT""'
         }
       }
       stage('Kubernetes Deployment - DEV')
