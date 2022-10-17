@@ -30,7 +30,7 @@ pipeline {
 
             "Dependency Scan": {
                 echo "Dependency scan"
-                // sh "mvn dependency-check:check"
+                sh "mvn dependency-check:check"
             },
             "Trivy scan": {
                 echo  "Trivy scan"
