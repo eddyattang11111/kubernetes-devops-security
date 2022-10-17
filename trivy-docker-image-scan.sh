@@ -12,7 +12,7 @@ exit_code=$?
 echo "Exit code is $exit_code"
 
 
-if [[ "${exit_code}" == 1]]; then
+if [[ "${exit_code}" == 1 ]]; then
     echo  "Image scanning failed. Vulnerabilities found"
     exit 1;
 else
