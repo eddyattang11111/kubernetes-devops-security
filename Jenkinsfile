@@ -30,7 +30,7 @@ pipeline {
 
             "Dependency Scan": {
                 echo "Dependency scan"
-                sh "mvn dependency-check:check"
+                // sh "mvn dependency-check:check"
             },
             "Trivy scan": {
                 echo  "Trivy scan"
@@ -70,7 +70,7 @@ pipeline {
       always {
             junit 'target/surefire-reports/*.xml'
             jacoco execPattern: 'target/jacoco.exec'
-            dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+            // dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
       }
       // success {
 
