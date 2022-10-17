@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.4</version>
+		<version>3.0.0-M5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -71,7 +71,7 @@
 				<version>7.2.1</version>
 				<configuration>
 					<format>ALL</format>
-					<FailBuildOnCVSS>5</FailBuildOnCVSS>
+					<FailBuildOnCVSS>9</FailBuildOnCVSS>
 				</configuration>
 				<executions>
 					<execution>
