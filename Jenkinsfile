@@ -27,7 +27,6 @@ pipeline {
       stage('Vulnerability scan - Docker') {
         steps {
           parallel(
-
             "Dependency Scan": {
                 echo "Dependency scan"
                 sh "mvn dependency-check:check"
@@ -37,9 +36,9 @@ pipeline {
                 sh "bash trivy-docker-image-scan.sh"
             },
             "OPA Conftest": {
-              sh "sudo docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-policy.rego Dockerfile"
+              echo "OPA conftest"
+              sh 'sudo docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-policy.rego Dockerfile'
             }
-
           )
           
         }
