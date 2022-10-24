@@ -27,10 +27,10 @@ pipeline {
       stage('Vulnerability scan - Docker') {
         steps {
           parallel(
-            "Dependency Scan": {
-                echo "Dependency scan"
-                sh "mvn dependency-check:check"
-            },
+            // "Dependency Scan": {
+            //     echo "Dependency scan"
+            //     sh "mvn dependency-check:check"
+            // },
             "Trivy scan": {
                 echo  "Trivy scan"
                 sh "bash trivy-docker-image-scan.sh"
